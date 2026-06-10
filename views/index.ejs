@@ -1,0 +1,33 @@
+<% layout("layout/boilerplate.ejs")-%>
+<body>
+
+<div class="container py-4">
+    <h1 class="page-heading">All Listing</h1>
+    <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-4">
+        <% for (let listing of list) { %>
+        <div class="col">
+            <div class="card h-100">
+                <a href="/listing/<%= listing._id %>">
+                    <img src="<%= listing.image.url %>" class="card-img-top" alt="Rental listing photo showing the property setting and interior layout in a bright welcoming presentation">
+                </a>
+                <div class="card-body d-flex flex-column justify-content-between">
+                    <div>
+                        <h5 class="card-title"><%= listing.title %></h5>
+                        <p class="card-text"><%= listing.price.toLocaleString("en-IN") %>/Night</p>
+                    </div>
+                    <div class="mt-3 d-flex justify-content-end align-items-center">
+                        <div>
+                            <a class="btn btn-secondary btn-sm me-2" href="/listing/<%= listing._id %>/edit">Edit</a>
+                            <form class="d-inline" method="POST" action="/listing/<%= listing._id %>?_method=DELETE">
+                                <button class="btn btn-danger btn-sm" type="submit">Delete</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <% } %>
+    </div>
+</div>
+
+</body>
